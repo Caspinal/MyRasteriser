@@ -1,0 +1,1 @@
+void raylibWindow(int width, int height, const char* title);
