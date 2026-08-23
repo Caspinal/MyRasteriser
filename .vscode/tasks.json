@@ -9,7 +9,7 @@
         "-x",
         "objective-c",
         "-g",
-        "${workspaceFolder}/*.c",
+        "*.c",
         "-o",
         "${workspaceFolder}/main",
         "-I/opt/homebrew/include",
@@ -21,7 +21,7 @@
         "-framework", "CoreVideo"
       ],
       "options": {
-        "cwd": "${fileDirname}"
+        "cwd": "${workspaceFolder}"
       },
       "group": {
         "kind": "build",

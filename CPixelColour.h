@@ -4,4 +4,9 @@ typedef struct
     float g;
     float b;
     float a;
-} PixelColour;
+
+     void* data; //  may add a table for extra bits likes ICC later;
+} CPixelColour;
+
+
+CPixelColour PixelColourMix(CPixelColour a, CPixelColour b, float t);

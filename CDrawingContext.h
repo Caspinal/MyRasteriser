@@ -1,4 +1,6 @@
 
+#include "CLMath.h"
+
 typedef enum  {
     CDrawingContextBlendMode_NONE,
     CDrawingContextBlendMode_ALPHA,
@@ -6,6 +8,10 @@ typedef enum  {
     CDrawingContextBlendMode_MULTIPLY
 } CDrawingContextBlendMode;
 
+typedef struct {
+    int x;
+    int y;
+} PixelPoint;
 
 
 char* tmpBuffer;
@@ -29,5 +35,6 @@ inline CDrawingContext getCurrentThreadContext();
 
 void drawRasterLine();
 void drawRasterPoint(int xc, int yc, int r);
-void drawRasterTriangle();
+void drawRasterTriangle(PixelPoint a, PixelPoint b, PixelPoint c);
+void drawRasterLineBresham(f4 a, f4 b);
 
