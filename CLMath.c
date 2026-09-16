@@ -8,6 +8,26 @@
 #include "CLMath.h"
 
 
+inline f4 f3ToF4(f3 a){
+    f4 result = {};
+    result.x = a.x;
+    result.y = a.y;
+    result.z = a.z;
+    result.w = 1.0f;
+    
+    return result;
+}
+
+inline f3 f4ToF3(f4 a){
+    f3 result = {};
+    result.x = a.x;
+    result.y = a.y;
+    result.z = a.z;
+    
+    
+    return result;
+}
+
 inline float f3Mag (f3 a)
 {
     return sqrt(a.x * a.x + a.y * a.y + a.z * a.z);
@@ -220,30 +240,33 @@ inline f3x3 f3x3MulF3x3(f3x3 a, f3x3 b)
 }
 
 
- inline f4x4 f4x4MulF4x4(f4x4 a, f4x4 b)
+inline f4x4 f4x4MulF4x4(f4x4 a, f4x4 b)
 {
-    f4x4 result = {};
+    f4x4 result = {0};
     
+    // Row 0
     result.m00 = a.m00*b.m00 + a.m10*b.m01 + a.m20*b.m02 + a.m30*b.m03;
     result.m10 = a.m00*b.m10 + a.m10*b.m11 + a.m20*b.m12 + a.m30*b.m13;
     result.m20 = a.m00*b.m20 + a.m10*b.m21 + a.m20*b.m22 + a.m30*b.m23;
     result.m30 = a.m00*b.m30 + a.m10*b.m31 + a.m20*b.m32 + a.m30*b.m33;
     
+    // Row 1
     result.m01 = a.m01*b.m00 + a.m11*b.m01 + a.m21*b.m02 + a.m31*b.m03;
     result.m11 = a.m01*b.m10 + a.m11*b.m11 + a.m21*b.m12 + a.m31*b.m13;
     result.m21 = a.m01*b.m20 + a.m11*b.m21 + a.m21*b.m22 + a.m31*b.m23;
     result.m31 = a.m01*b.m30 + a.m11*b.m31 + a.m21*b.m32 + a.m31*b.m33;
     
+    // Row 2
     result.m02 = a.m02*b.m00 + a.m12*b.m01 + a.m22*b.m02 + a.m32*b.m03;
     result.m12 = a.m02*b.m10 + a.m12*b.m11 + a.m22*b.m12 + a.m32*b.m13;
     result.m22 = a.m02*b.m20 + a.m12*b.m21 + a.m22*b.m22 + a.m32*b.m23;
-    result.m23 = a.m02*b.m30 + a.m12*b.m31 + a.m22*b.m32 + a.m32*b.m33;
+    result.m32 = a.m02*b.m30 + a.m12*b.m31 + a.m22*b.m32 + a.m32*b.m33; // FIXED: m32
     
+    // Row 3
     result.m03 = a.m03*b.m00 + a.m13*b.m01 + a.m23*b.m02 + a.m33*b.m03;
     result.m13 = a.m03*b.m10 + a.m13*b.m11 + a.m23*b.m12 + a.m33*b.m13;
     result.m23 = a.m03*b.m20 + a.m13*b.m21 + a.m23*b.m22 + a.m33*b.m23;
     result.m33 = a.m03*b.m30 + a.m13*b.m31 + a.m23*b.m32 + a.m33*b.m33;
-    
     
     return result;
 }
@@ -396,7 +419,7 @@ inline f4x4 f4x4Viewport(float x, float y, float width, float height, float minD
     
     // Scale factors (Diagonal)
     result.m00 = halfWidth;
-    result.m11 = halfHeight;
+    result.m11 = -halfHeight; // assumes top left is 0,0 make positve for bottom left
     result.m22 = halfDepth;
     
     // Translation factors (4th column)
@@ -429,7 +452,7 @@ inline f3x3 f3x3Scale(f3 a)
 }
 
 inline f3x3 f3x3Rot(f3 a, float r){
-    
+
     f3x3 result = f3x3Ident();
     
     float s = sinf(r);
@@ -482,6 +505,16 @@ inline f3 lerpf3(f3 a, f3 b, float t)
     r.x =  lerpf(a.x, b.x, t);
     r.y =  lerpf(a.y, b.y, t);
     r.z =  lerpf(a.z, b.z, t);
+    return r;
+}
+
+inline f4 lerpf4(f4 a, f4 b, float t)
+{
+    f4 r = {};
+    r.x =  lerpf(a.x, b.x, t);
+    r.y =  lerpf(a.y, b.y, t);
+    r.z =  lerpf(a.z, b.z, t);
+    r.w =  lerpf(a.w, b.w, t);
     return r;
 }
 

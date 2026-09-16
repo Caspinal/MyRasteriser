@@ -28,6 +28,12 @@ typedef struct
 
 typedef struct
 {
+    float x;
+    float y;
+} f2;
+
+typedef struct
+{
     float m00;
     float m10;
     float m20;
@@ -118,11 +124,15 @@ f4 f4x4MulF4(f4x4 a, f4 b);
 
 float lerpf(float a, float b, float t);
 f3 lerpf3(f3 a, f3 b, float t);
+f4 lerpf4(f4 a, f4 b, float t);
 
 float minf(float a, float b);
 float maxf(float a, float b);
 
 f4 f4ClipToScreen(f4 clipPos, f4x4 viewport);
+
+f4 f3ToF4(f3 a);
+f3 f4ToF3(f4 a);
 
 
 #endif /* CLMath_h */

@@ -15,6 +15,7 @@
         "-I/opt/homebrew/include",
         "-L/opt/homebrew/lib",
         "-lraylib",
+        "-licns",
         "-framework", "OpenGL",
         "-framework", "Cocoa",
         "-framework", "IOKit",

@@ -1,3 +1,6 @@
+
+#ifndef CPixelColour_h
+#define CPixelColour_h
 typedef struct
 {
     float r;
@@ -5,8 +8,9 @@ typedef struct
     float b;
     float a;
 
-     void* data; //  may add a table for extra bits likes ICC later;
+     //void* data; //  may add a table for extra bits likes ICC later;
 } CPixelColour;
 
 
 CPixelColour PixelColourMix(CPixelColour a, CPixelColour b, float t);
+#endif 

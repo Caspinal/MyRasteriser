@@ -18,10 +18,14 @@ typedef struct COBJMesh COBJMesh;
 struct COBJMesh
 {
     CArray vertices;
-    CArray faceIndicies;
-    // CArray faceNormals;
-    //CArray faceTextureCoordinates;
+    CArray faceNormals;
+    CArray faceTextureCoordinates;
     
+    CArray faceIndicies;
+    CArray faceNormalIndicies;
+    CArray faceTextureCoordinatesIndicies;
+    
+
     int indexPerFace;
     int vertexCount;
     int indexCount;

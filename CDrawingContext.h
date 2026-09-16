@@ -1,5 +1,7 @@
 
 #include "CLMath.h"
+#include <stdbool.h>
+#include "CPixelColour.h"
 
 typedef enum  {
     CDrawingContextBlendMode_NONE,
@@ -13,8 +15,18 @@ typedef struct {
     int y;
 } PixelPoint;
 
+typedef struct 
+{
+    f4 pos;
+    f3 normal;
+    f2 texCoord;
+    
+    CPixelColour col;
+} Vertex;
+
 
 char* tmpBuffer;
+float* tmpDepthBuffer;
 
 typedef struct {
     int width;
@@ -35,6 +47,6 @@ inline CDrawingContext getCurrentThreadContext();
 
 void drawRasterLine();
 void drawRasterPoint(int xc, int yc, int r);
-void drawRasterTriangle(PixelPoint a, PixelPoint b, PixelPoint c);
-void drawRasterLineBresham(f4 a, f4 b);
 
+void drawRasterLineBresham(f4 a, f4 b);
+void DrawQuad(Vertex* v, f4x4 viewport);
