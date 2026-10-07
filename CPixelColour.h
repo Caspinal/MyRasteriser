@@ -1,6 +1,9 @@
 
 #ifndef CPixelColour_h
 #define CPixelColour_h
+
+
+
 typedef struct
 {
     float r;
