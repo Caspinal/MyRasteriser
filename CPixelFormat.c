@@ -2,6 +2,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "CLMath.h"
+#include <string.h>
+#include <ctype.h>
+#include <stdbool.h>
 
 CPixelFormat* CPixelFormatCreate(int width, int height, char* name, char* encoding, void* backing)
 {
@@ -39,6 +42,101 @@ CPixelColour CPixelFormatGetPixelColourSample(CPixelFormat* pf, float u, float v
     return pf->samplePixelColour(pf, u, v);
 }
 
+struct compoent 
+{
+    char* name;
+    char* type;
+    // min max vals? 
+    size_t size;
+    size_t byteOffset;
+
+}
+
+void CPixelFormatInitWithEncoding(CPixelFormat* pf, char* encoding)
+{
+
+    // try and find implementaion;
+
+
+    //use slow path.
+
+    // find component order
+
+   int encodingLength = strlen(encoding);
+
+   // struct for this? 
+    int r = -1;
+    size_t rSize;
+    // type? f unorm? 
+    int g = -1;
+    size_t gSize;
+    int b = -1;
+    size_t bSize;
+    int a = -1;
+    size_t aSize;
+
+  
+
+    
+   for(int i = 0; i < encodingLength; i++)
+   {
+        if(tolower(encoding[i]) == 'r')
+        {
+            r = i;
+            continue;
+        }
+
+        if(tolower(encoding[i]) == 'g')
+        {
+            g = i;
+            continue;
+        }
+
+
+        if(tolower(encoding[i]) == 'b')
+        {
+            b = i;
+            continue;
+        }
+
+        if(tolower(encoding[i]) == 'a')
+        {
+            a = i;
+            continue;
+        }
+
+        if(isdigit(encoding[i]))
+        {
+           
+            char digits[100] = "";
+            int di = 0;
+            while (isdigit(encoding[i]) && i < encodingLength)
+            {
+                        digits[di] = encoding[i];
+                        di++;
+                        digits[di] = '\0';
+                        
+                      i++;
+                
+            };
+            
+           // back progagate found components and assign 
+           // cehck if equel to found components; 
+
+            printf("%s \n",digits);
+
+            continue;
+        }
+
+    }
+
+    // find bits
+    // sum bits
+    // alocate memory
+     
+
+
+};
 
 CPixelColour CPixelFormatNearestSample(CPixelFormat* pf, float u, float v, CPixelColour colour)
 {
